@@ -1,0 +1,80 @@
+{
+	"name": "@drillbooks/rust-imports",
+	"version": "0.1.0",
+	"description": "Import adjacent Rust files as content-addressed napi-rs modules in Bun.",
+	"license": "UNLICENSED",
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"bun": "./dist/index.js",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./register": {
+			"types": "./dist/register.d.ts",
+			"bun": "./dist/register.js",
+			"import": "./dist/register.js",
+			"default": "./dist/register.js"
+		},
+		"./runtime": {
+			"types": "./dist/runtime.d.ts",
+			"bun": "./dist/runtime.js",
+			"import": "./dist/runtime.js",
+			"default": "./dist/runtime.js"
+		},
+		"./build": {
+			"types": "./dist/build.d.ts",
+			"bun": "./dist/build.js",
+			"import": "./dist/build.js",
+			"default": "./dist/build.js"
+		},
+		"./compiler": {
+			"types": "./dist/compiler.d.ts",
+			"bun": "./dist/compiler.js",
+			"import": "./dist/compiler.js",
+			"default": "./dist/compiler.js"
+		},
+		"./types": {
+			"types": "./dist/types.d.ts",
+			"bun": "./dist/types.js",
+			"import": "./dist/types.js",
+			"default": "./dist/types.js"
+		}
+	},
+	"bin": {
+		"rust-imports": "./bin/rust-imports"
+	},
+	"files": [
+		"bin",
+		"dist",
+		"README.md"
+	],
+	"sideEffects": [
+		"./dist/register.js"
+	],
+	"engines": {
+		"bun": ">=1.4.0"
+	},
+	"scripts": {
+		"clean": "bun -e \"import { rm } from 'node:fs/promises'; await rm('dist', { recursive: true, force: true })\"",
+		"build": "bun run clean && tsc --project tsconfig.json",
+		"test": "bun test",
+		"smoke:pack": "bun run build && bun ./scripts/pack-smoke.ts",
+		"prepack": "bun run build"
+	},
+	"peerDependencies": {
+		"@types/bun": ">=1.4.0"
+	},
+	"peerDependenciesMeta": {
+		"@types/bun": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@types/bun": "^1.4.0",
+		"typescript": "^6.0.3"
+	},
+	"packageManager": "bun@1.4.0"
+}

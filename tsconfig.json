@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"allowArbitraryExtensions": true,
+		"declaration": true,
+		"outDir": "dist",
+		"rootDir": ".",
+		"strict": true,
+		"skipLibCheck": true,
+		"verbatimModuleSyntax": true,
+		"types": ["bun"]
+	},
+	"include": [
+		"build.ts",
+		"cli.ts",
+		"compiler.ts",
+		"index.ts",
+		"register.ts",
+		"runtime.ts",
+		"types.ts"
+	],
+	"exclude": ["dist", "scripts", "*.test.ts"]
+}
