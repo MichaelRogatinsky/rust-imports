@@ -1,4 +1,4 @@
-# `@drillbooks/rust-imports`
+# `rust-imports`
 
 Import a Rust file beside TypeScript and use its top-level napi-rs exports as a
 normal Bun module:
@@ -14,7 +14,7 @@ already published. Once a registry package or local tarball is available, instal
 it as a runtime dependency:
 
 ```sh
-bun add @drillbooks/rust-imports
+bun add rust-imports
 ```
 
 ## Requirements
@@ -55,10 +55,10 @@ The zero-configuration preload uses the current working directory as its source
 boundary. Add it to `bunfig.toml` for development and tests:
 
 ```toml
-preload = ["@drillbooks/rust-imports/register"]
+preload = ["rust-imports/register"]
 
 [test]
-preload = ["@drillbooks/rust-imports/register"]
+preload = ["rust-imports/register"]
 ```
 
 The register entrypoint uses a process-global guard, so loading it more than once
@@ -67,7 +67,7 @@ does not install duplicate plugins.
 For a narrower boundary or custom compiler options, create your own preload:
 
 ```ts
-import { rustImportsPlugin } from '@drillbooks/rust-imports/runtime';
+import { rustImportsPlugin } from 'rust-imports/runtime';
 
 Bun.plugin(
   rustImportsPlugin({
@@ -115,7 +115,7 @@ The programmatic build adapter discovers reachable local TS/JS modules, compiles
 their adjacent Rust imports, and does not mutate source by default:
 
 ```ts
-import { prepareRustImports } from '@drillbooks/rust-imports/build';
+import { prepareRustImports } from 'rust-imports/build';
 
 const result = await prepareRustImports({
   entrypoints: ['server.ts'],
@@ -200,12 +200,12 @@ service whose root contains the entrypoint.
 
 ## Public entrypoints
 
-- `@drillbooks/rust-imports` — curated runtime, build, compiler, and public types.
-- `@drillbooks/rust-imports/register` — guarded zero-config Bun preload.
-- `@drillbooks/rust-imports/runtime` — runtime plugin and runtime options.
-- `@drillbooks/rust-imports/build` — dependency-graph preparation.
-- `@drillbooks/rust-imports/compiler` — low-level single-module compilation.
-- `@drillbooks/rust-imports/types` — shared public TypeScript types.
+- `rust-imports` — curated runtime, build, compiler, and public types.
+- `rust-imports/register` — guarded zero-config Bun preload.
+- `rust-imports/runtime` — runtime plugin and runtime options.
+- `rust-imports/build` — dependency-graph preparation.
+- `rust-imports/compiler` — low-level single-module compilation.
+- `rust-imports/types` — shared public TypeScript types.
 
 ## Version 0.1 limitations
 

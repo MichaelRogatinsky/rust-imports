@@ -28,6 +28,7 @@ try {
 	const packedPaths = await listFiles(join(extractedDirectory, 'package'));
 	for (const required of [
 		'package.json',
+		'LICENSE',
 		'README.md',
 		'dist/index.js',
 		'dist/index.d.ts',
@@ -54,17 +55,17 @@ try {
 
 	await writeFile(
 		join(consumerDirectory, 'bunfig.toml'),
-		'preload = ["@drillbooks/rust-imports/register"]\n'
+		'preload = ["rust-imports/register"]\n'
 	);
 	await run(
 		'bun',
 		[
 			'-e',
-			`import { compileRustModule, prepareRustImports, rustImportsPlugin } from '@drillbooks/rust-imports';
-			 import { prepareRustImports as buildExport } from '@drillbooks/rust-imports/build';
-			 import { compileRustModule as compilerExport } from '@drillbooks/rust-imports/compiler';
-			 import { rustImportsPlugin as runtimeExport } from '@drillbooks/rust-imports/runtime';
-			 import '@drillbooks/rust-imports/register';
+			`import { compileRustModule, prepareRustImports, rustImportsPlugin } from 'rust-imports';
+			 import { prepareRustImports as buildExport } from 'rust-imports/build';
+			 import { compileRustModule as compilerExport } from 'rust-imports/compiler';
+			 import { rustImportsPlugin as runtimeExport } from 'rust-imports/runtime';
+			 import 'rust-imports/register';
 			 if (compileRustModule !== compilerExport || prepareRustImports !== buildExport || rustImportsPlugin !== runtimeExport) throw new Error('subpath exports do not share implementations');
 			 console.log('imports-ok');`
 		],
@@ -74,12 +75,12 @@ try {
 
 	const installedManifest = JSON.parse(
 		await readFile(
-			join(consumerDirectory, 'node_modules', '@drillbooks', 'rust-imports', 'package.json'),
+			join(consumerDirectory, 'node_modules', 'rust-imports', 'package.json'),
 			'utf8'
 		)
 	) as { name?: string; version?: string };
 	if (
-		installedManifest.name !== '@drillbooks/rust-imports' ||
+		installedManifest.name !== 'rust-imports' ||
 		installedManifest.version !== '0.1.0'
 	) {
 		throw new Error('installed package identity does not match the packed package');

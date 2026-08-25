@@ -1,10 +1,14 @@
 {
-	"name": "@drillbooks/rust-imports",
-	"version": "0.1.0",
-	"description": "Import adjacent Rust files as content-addressed napi-rs modules in Bun.",
-	"license": "UNLICENSED",
-	"type": "module",
-	"types": "./dist/index.d.ts",
+	"name": "rust-imports",
+	"version": "0.1.1",
+	"devDependencies": {
+		"@types/bun": "^1.4.0",
+		"@types/node": "^26.3.0",
+		"typescript": "^6.0.3"
+	},
+	"peerDependencies": {
+		"@types/bun": ">=1.4.0"
+	},
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -46,16 +50,22 @@
 	"bin": {
 		"rust-imports": "./bin/rust-imports"
 	},
+	"description": "Import adjacent Rust files as content-addressed napi-rs modules in Bun.",
+	"engines": {
+		"bun": ">=1.4.0"
+	},
 	"files": [
 		"bin",
 		"dist",
+		"LICENSE",
 		"README.md"
 	],
-	"sideEffects": [
-		"./dist/register.js"
-	],
-	"engines": {
-		"bun": ">=1.4.0"
+	"license": "Apache-2.0",
+	"packageManager": "bun@1.4.0",
+	"peerDependenciesMeta": {
+		"@types/bun": {
+			"optional": true
+		}
 	},
 	"scripts": {
 		"clean": "bun -e \"import { rm } from 'node:fs/promises'; await rm('dist', { recursive: true, force: true })\"",
@@ -64,17 +74,9 @@
 		"smoke:pack": "bun run build && bun ./scripts/pack-smoke.ts",
 		"prepack": "bun run build"
 	},
-	"peerDependencies": {
-		"@types/bun": ">=1.4.0"
-	},
-	"peerDependenciesMeta": {
-		"@types/bun": {
-			"optional": true
-		}
-	},
-	"devDependencies": {
-		"@types/bun": "^1.4.0",
-		"typescript": "^6.0.3"
-	},
-	"packageManager": "bun@1.4.0"
+	"sideEffects": [
+		"./dist/register.js"
+	],
+	"type": "module",
+	"types": "./dist/index.d.ts"
 }
