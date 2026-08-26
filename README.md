@@ -1,5 +1,7 @@
 # `rust-imports`
 
+[![npm version](https://img.shields.io/npm/v/rust-imports.svg)](https://www.npmjs.com/package/rust-imports)
+
 Import a Rust file beside TypeScript and use its top-level napi-rs exports as a
 normal Bun module:
 
@@ -9,15 +11,19 @@ import { add } from './math.rs';
 console.log(add(5, 7));
 ```
 
-Until the package is published to a registry, install it directly from the Git
-repository as a runtime dependency:
+Install the published package from npm:
+
+```sh
+bun add rust-imports
+```
+
+To test an unreleased revision, install the Git repository directly. Git installs
+are pinned to a commit in `bun.lock`; run `bun update rust-imports` when you
+intentionally want to adopt a newer repository revision.
 
 ```sh
 bun add https://github.com/MichaelRogatinsky/rust-imports.git
 ```
-
-Git installs are pinned to a commit in `bun.lock`; run `bun update rust-imports`
-when you intentionally want to adopt a newer repository revision.
 
 ## Requirements
 
@@ -235,3 +241,18 @@ whenever the TypeScript source changes; CI rejects stale generated output.
 The compiler safety tests build a tiny raw Node-API fixture with `rustc`; they do
 not search a surrounding workspace for an installed native dependency or contact
 the Cargo registry. CI runs these checks with Bun 1.4.0 and Rust 1.83.0.
+
+## Releasing
+
+Releases are driven by version tags. From a clean, up-to-date `main` branch,
+choose the appropriate semantic-version increment and push the commit and tag:
+
+```sh
+npm version patch
+git push origin main --follow-tags
+```
+
+Use `minor` or `major` instead of `patch` when appropriate. The release workflow
+checks that the tag matches `package.json`, runs the complete test and package
+validation suite, publishes to npm through trusted publishing, and creates the
+matching GitHub Release.

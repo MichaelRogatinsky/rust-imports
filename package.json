@@ -7,12 +7,24 @@
 		"typescript": "^6.0.3"
 	},
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com"
+		"access": "public",
+		"registry": "https://registry.npmjs.org"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/MichaelRogatinsky/rust-imports.git"
 	},
+	"homepage": "https://github.com/MichaelRogatinsky/rust-imports#readme",
+	"bugs": {
+		"url": "https://github.com/MichaelRogatinsky/rust-imports/issues"
+	},
+	"keywords": [
+		"bun",
+		"rust",
+		"napi-rs",
+		"native-addon",
+		"typescript"
+	],
 	"peerDependencies": {
 		"@types/bun": ">=1.4.0"
 	},
