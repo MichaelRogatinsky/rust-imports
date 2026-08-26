@@ -9,13 +9,15 @@ import { add } from './math.rs';
 console.log(add(5, 7));
 ```
 
-This package identity is provisional and the package is not represented here as
-already published. Once a registry package or local tarball is available, install
-it as a runtime dependency:
+Until the package is published to a registry, install it directly from the Git
+repository as a runtime dependency:
 
 ```sh
-bun add rust-imports
+bun add https://github.com/MichaelRogatinsky/rust-imports.git
 ```
+
+Git installs are pinned to a commit in `bun.lock`; run `bun update rust-imports`
+when you intentionally want to adopt a newer repository revision.
 
 ## Requirements
 
@@ -225,6 +227,10 @@ bun test
 bun run build
 bun run smoke:pack
 ```
+
+The generated `dist/` directory is committed because direct Git dependencies do
+not reliably run package lifecycle builds. Regenerate it with `bun run build`
+whenever the TypeScript source changes; CI rejects stale generated output.
 
 The compiler safety tests build a tiny raw Node-API fixture with `rustc`; they do
 not search a surrounding workspace for an installed native dependency or contact

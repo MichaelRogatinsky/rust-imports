@@ -1,5 +1,4 @@
 node_modules/
-dist/
 .rust-imports/
 *.tgz
 .DS_Store

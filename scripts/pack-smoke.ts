@@ -4,6 +4,9 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
 const packageRoot = resolve(import.meta.dir, '..');
+const expectedManifest = JSON.parse(
+	await readFile(join(packageRoot, 'package.json'), 'utf8')
+) as { name?: string; version?: string };
 const temporaryRoot = await mkdtemp(join(tmpdir(), 'rust-imports-pack-'));
 
 try {
@@ -80,8 +83,8 @@ try {
 		)
 	) as { name?: string; version?: string };
 	if (
-		installedManifest.name !== 'rust-imports' ||
-		installedManifest.version !== '0.1.0'
+		installedManifest.name !== expectedManifest.name ||
+		installedManifest.version !== expectedManifest.version
 	) {
 		throw new Error('installed package identity does not match the packed package');
 	}
