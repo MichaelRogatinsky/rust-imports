@@ -1,6 +1,6 @@
 {
 	"name": "rust-imports",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"devDependencies": {
 		"@types/bun": "^1.4.0",
 		"@types/node": "^26.3.0",
